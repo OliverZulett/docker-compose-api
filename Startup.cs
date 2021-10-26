@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using DockerComposeAPI.Models;
+
 
 namespace DockerComposeAPI
 {
@@ -26,7 +29,10 @@ namespace DockerComposeAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            var server = Configuration["DbServer"] ?? "localhost";
+            var port = Configuration["DbPort"] ?? "1344";
+            var user = Configuration["DbUser"] ?? "SA";
+            var password = Configuration["DbPassword"] ?? "MySuperPassword123";
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
