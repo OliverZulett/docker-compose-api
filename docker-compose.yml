@@ -12,18 +12,23 @@ services:
       - "1433:1433"
     networks:
       - db_net
-    # volumes:
-    #   - mssql-server:/var/opt/mssql/data:r
+    volumes:
+      - mssql-server:/var/opt/mssql
 
-  # docker-compose-api:
-  #   build: .
-  #   # environment:
-  #   depends_on:
-  #     - sql-server
-  #   ports:
-  #     - "8080:80"
-  #   networks:
-  #     - db_net
+  docker-compose-api:
+    build: .
+    environment:
+      DB_SERVER: "sql-server"
+      DB_PORT: "1433"
+      DB_USER: "SA"
+      DB_PASSWORD: "MySuperPassword123"
+      DB_NAME: "Colors"
+    depends_on:
+      - sql-server
+    ports:
+      - "8080:80"
+    networks:
+      - db_net
 
 networks:
   db_net:

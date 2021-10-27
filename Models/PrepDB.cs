@@ -28,6 +28,7 @@ namespace DockerComposeAPI.Models
               new Color() {colorName = "Blue"},
               new Color() {colorName = "Gray"}
             );
+            context.SaveChanges();
           }
           else
           {

@@ -29,11 +29,11 @@ namespace DockerComposeAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var server = Configuration["DbServer"] ?? "localhost";
-            var port = Configuration["DbPort"] ?? "1433";
-            var user = Configuration["DbUser"] ?? "SA";
-            var password = Configuration["DbPassword"] ?? "MySuperPassword123";
-            var database = Configuration["Database"] ?? "Colors";
+            var server = Configuration["DB_SERVER"] ?? "localhost";
+            var port = Configuration["DB_PORT"] ?? "1433";
+            var user = Configuration["DB_USER"] ?? "SA";
+            var password = Configuration["DB_PASSWORD"] ?? "MySuperPassword123";
+            var database = Configuration["DB_NAME"] ?? "Colors";
             services.AddDbContext<ColorContext>(
                 options => 
                 options.UseSqlServer(
