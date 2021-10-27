@@ -30,9 +30,16 @@ namespace DockerComposeAPI
         public void ConfigureServices(IServiceCollection services)
         {
             var server = Configuration["DbServer"] ?? "localhost";
-            var port = Configuration["DbPort"] ?? "1344";
+            var port = Configuration["DbPort"] ?? "1433";
             var user = Configuration["DbUser"] ?? "SA";
             var password = Configuration["DbPassword"] ?? "MySuperPassword123";
+            var database = Configuration["Database"] ?? "Colors";
+            services.AddDbContext<ColorContext>(
+                options => 
+                options.UseSqlServer(
+                    $"Server={server},{port};Initial Catalog={database};User ID={user};Password={password}"
+                )
+            );
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -49,6 +56,8 @@ namespace DockerComposeAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DockerComposeAPI v1"));
             }
+
+            PrepDB.PrepPopulation(app);
 
             app.UseHttpsRedirection();
 

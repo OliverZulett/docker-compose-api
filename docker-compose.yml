@@ -15,15 +15,15 @@ services:
     # volumes:
     #   - mssql-server:/var/opt/mssql/data:r
 
-  docker-compose-api:
-    build: .
-    # environment:
-    depends_on:
-      - sql-server
-    ports:
-      - "8080:80"
-    networks:
-      - db_net
+  # docker-compose-api:
+  #   build: .
+  #   # environment:
+  #   depends_on:
+  #     - sql-server
+  #   ports:
+  #     - "8080:80"
+  #   networks:
+  #     - db_net
 
 networks:
   db_net:
